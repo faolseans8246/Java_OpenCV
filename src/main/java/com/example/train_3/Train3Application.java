@@ -145,14 +145,22 @@ public class Train3Application extends JFrame {
 
         SpringApplication.run(Train3Application.class, args);
 
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);       // OpenCV fayllarini yuklashni taminlaydi
+
+        /**
+         * Java dasturlash tilini GUI bilan ishlash jarayonini tashkillashtiradi
+         */
         EventQueue.invokeLater(new Runnable() {
+
+            // Berilgan dastur bilan ishlashni ta'minlovchi method
             @Override
             public void run() {
                 Train3Application train3Application = new Train3Application();
 
-                // Start camera in thread
+                // Yuqorida yangi holat bo'lsa tahlil qiladi va ishlatadi
                 new Thread(new Runnable() {
+
+                    // Ish methodini qayta ko'rib chiquvchi qism
                     @Override
                     public void run() {
                         train3Application.startCamera();
