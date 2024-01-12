@@ -16,27 +16,29 @@ import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//Java OpenCV Class qismi
 @SpringBootApplication
 public class Train3Application extends JFrame {
 
-//    Camera screen
-    private JLabel label_1;
-    private JButton button_1;
-    private VideoCapture videoCapture;
-    private Mat matImage;
+//    Yordamchi java elementlari
+    private JLabel label_1;             // joylashuv nishonlarini ta'minlash
+    private JButton button_1;           // Vazifa buttonini qo'shish
+    private VideoCapture videoCapture;  // Kamerada video va tasvir olish uchun ishlatiladi
+    private Mat matImage;               // OpenCV kutubxonasida ma'lumotlarni saqlash, va ma'lumotlrni matritsa ko'rinishiga o'tkazish
 
-    private boolean click_button_1;
+    private boolean click_button_1;     // button harakati bilan ishlash
 
-
+//  OpenCV bilan ishlash qismi methodi
     public Train3Application() {
 
 //        dizayn UI
         setLayout(null);
 
-        label_1 = new JLabel();
-        label_1.setBounds(0, 0, 640, 480);
-        add(label_1);
+        label_1 = new JLabel();                                 // Joylashuv nuqtasini sozlash
+        label_1.setBounds(0, 0, 640, 480);      // nishon joylashuv qismi
+        add(label_1);                                               // Frame oynasiga nishonni joylash
 
+        // Buttonnni sozlash
         button_1 = new JButton("Rasmga olish");
         button_1.setBounds(225, 480, 180, 40);
         add(button_1);
@@ -51,7 +53,11 @@ public class Train3Application extends JFrame {
             }
         });
 
-//
+
+        /**
+         * Bu method bilan ishlashda berilgan oyna yopilganda bajariladigan amallar
+         * vazifasi yuklangan
+         */
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -63,6 +69,7 @@ public class Train3Application extends JFrame {
         });
 
 
+        //JFrame oynasi vazifalar kiritilgan qism
         setTitle("OpenCV oynasida camera bilan ishlash");
         setSize(new Dimension(640, 560));
         setLocationRelativeTo(null);
@@ -76,42 +83,50 @@ public class Train3Application extends JFrame {
 
     }
 
-//    create camera
 
+//    Camerani ishga tushirish qismi
     public void startCamera() {
 
-        videoCapture = new VideoCapture(0);
-        matImage = new Mat();
-        byte[] imageDate;
+        videoCapture = new VideoCapture(0);     // 0 -indexli camerani ishga tushirish uchun ishlatiladi
+        matImage = new Mat();                           // Mat classi shakllantiriladi va undan obekt olingan qismi
+        byte[] imageDate;                               // matritsa hosil qilish (byte turli matritsa hosil qilish)
 
         ImageIcon imageIcon_1;
 
+        /**
+         * Berilgan rasmni shakllantirish va uni byte code holatga ko'chirish qismi
+         */
         while (true) {
 
-//            Rasimni matritsada o'qish
+           //  Rasimni matritsada o'qish
             videoCapture.read(matImage);
 
-//            matritsani bayt ko'rinishiga o'tkazish
+            // matritsani bayt ko'rinishiga o'tkazish (Mat funksiyani byte[] orqali bayt ko'rinishiga o'tkazadi)
             final MatOfByte matOfByte = new MatOfByte();
-            Imgcodecs.imencode(".jpg", matImage, matOfByte);
+            Imgcodecs.imencode(".jpg", matImage, matOfByte);        // matImageni ".jpg" formatga o'tkazib matOfBytega yozadi, mana shu holatda unidan kerakli joylarda foydalanish mumkin
 
-            imageDate = matOfByte.toArray();
+            imageDate = matOfByte.toArray();        //  Byte[] assivga matOfByte array ko'rinishida joylashtirildi
 
-//            Labelga qo'shish
+             // Labelga qo'shish
             imageIcon_1 = new ImageIcon(imageDate);
             label_1.setIcon(imageIcon_1);
 
+            /**
+             * Button bosilganda bajariladigan vazifalar qismi
+             */
             if (click_button_1) {
 
-                String name = JOptionPane.showInputDialog(this, "Rasm nomini kiriting");
+                String name = JOptionPane.showInputDialog(this, "Rasm nomini kiriting"); // rasm nomini kiritish qismi
 
-//                Jarayonni bajaraish va saqlash qismi
+                // Jarayonni bajaraish va saqlash qismi
                 if (name == null) {
-                    name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date());
+                    name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date()); // nomsiz saqlansa chislo bilan saqlaydi
                 }
 
+
+                String save_path_image = "D:\\ZakazProjects\\Java\\BahodirDomla\\PractProject\\SaveImages\\";
                 // Faylga yozish qismi
-                Imgcodecs.imwrite("myImage/" + name + ".jpg", matImage);
+                Imgcodecs.imwrite(save_path_image + name + ".jpg", matImage);   // olingan rasmni saqlash qismi
                 click_button_1 = false;
 
             }
@@ -120,6 +135,12 @@ public class Train3Application extends JFrame {
 
     }
 
+
+    /**
+     * Berilga qismalr bilan ishlovchi asosiy method
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         SpringApplication.run(Train3Application.class, args);
