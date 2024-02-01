@@ -120,7 +120,7 @@ public class Train3Application extends JFrame {
 
                 // Jarayonni bajaraish va saqlash qismi
                 if (name == null) {
-                    name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date()); // nomsiz saqlansa chislo bilan saqlaydi
+                    name = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date()); // nomsiz saqlansa chislo bilan saqlaydi
                 }
 
 
@@ -168,6 +168,13 @@ public class Train3Application extends JFrame {
                 }).start();
             }
         });
+
+
+        /**
+         *  Natijani olish qsimi
+         */
+
+
 
     }
 

@@ -34,6 +34,44 @@
             <version>3.4.2-0</version>
         </dependency>
 
+
+<!--        SVM metodikasi -->
+<!--        <dependency>-->
+<!--            <groupId>de.bwaldvogel</groupId>-->
+<!--            <artifactId>libsvm</artifactId>-->
+<!--            <version>3.24</version>-->
+<!--        </dependency>-->
+
+        <!-- Spring Boot dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- OpenCV dependency -->
+<!--        <dependency>-->
+<!--            <groupId>org.openpnp</groupId>-->
+<!--            <artifactId>opencv</artifactId>-->
+<!--            <version>4.5.1-1</version>-->
+<!--        </dependency>-->
+
+        <!-- Kaggle Java dependency -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.juliensergent</groupId>-->
+<!--            <artifactId>kaggle-java</artifactId>-->
+<!--            <version>0.19</version>-->
+<!--        </dependency>-->
+
+<!--        API bilan ishlash uchun OkHTTP kutubxonasini qo'shish    -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.1</version>
+        </dependency>
+
+
+
+
     </dependencies>
 
     <build>
